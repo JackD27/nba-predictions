@@ -1,5 +1,5 @@
-from GUI import App
+from App import GUI
 
 if __name__ == '__main__':
-    lol = App()
-    lol.mainloop()
+    Program = GUI()
+    Program.mainloop()
