@@ -23,7 +23,7 @@ class DraftKingsWebsite:
                 curr_line = player['outcomes'][0]['line']        
                 curr_over = player['outcomes'][0]['oddsAmerican']
                 curr_under = player['outcomes'][1]['oddsAmerican']
-                playerInfo = {"Player ": curr_label, 
+                playerInfo = {"Player": curr_label, 
                     "Prop Name": prop_name,
                     "Line": curr_line, 
                     "Over":curr_over, 
@@ -47,6 +47,6 @@ class DraftKingsWebsite:
         reboundsDataframe = pd.DataFrame(self.get_NBA_DKplayer_stats(1216))
         assistsDataframe = pd.DataFrame(self.get_NBA_DKplayer_stats(1217))
         finalDataframe = pd.concat([pointsDataframe, reboundsDataframe, assistsDataframe])
-        finalDataframe.to_csv('FinalDKDataframe.csv', index=False)
+        return finalDataframe
 
         
