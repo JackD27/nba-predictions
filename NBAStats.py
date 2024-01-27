@@ -31,7 +31,7 @@ class NBAStatsClass:
             d.append(playerInfo)
         return pd.DataFrame(d)
     
-    def merge_files(self):
+    def merged_files(self):
         nbaStats = self.getNBAstats()
         nbaStats = nbaStats.melt(id_vars=["Player", "MPG"], 
             value_vars=["Points", "Rebounds", "Assists"], 
@@ -44,8 +44,3 @@ class NBAStatsClass:
         mergedFrame = nbaStats.merge(self.DKClass.get_dataframe(), on=['Player', 'Prop Name'])
         mergedFrame = mergedFrame[['Player', 'MPG','Prop Name', 'Stat', 'AvgPerMin', 'Mins', 'EstimatedLine','Under', 'Line', 'Over']]
         mergedFrame.to_csv('FinalDataframe.csv', index=False)
-
-
-stats = NBAStatsClass()
-stats.merge_files()
-    

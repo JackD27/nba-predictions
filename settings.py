@@ -2,7 +2,7 @@ import datetime
 
 class Settings:
 
-    VERSION = 0.1
+    VERSION = 0.2
 
     YEAR = datetime.date.today().year
     APP_NAME = "NBA DK Basketball Lines"

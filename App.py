@@ -3,19 +3,19 @@ import tkinter.messagebox
 import requests
 import webbrowser
 import sys
-from DK import DraftKingsWebsite
+from NBAStats import NBAStatsClass
 from settings import Settings
 
 class GUI(tkinter.Tk):
     def __init__(self):
-        dk = DraftKingsWebsite()
+        NBAStats = NBAStatsClass()
         tkinter.Tk.__init__(self)
         self.title(Settings.APP_NAME)
         self.resizable(True, True)
         self.minsize(Settings.WIDTH, Settings.HEIGHT)
         self.maxsize(Settings.MAX_WIDTH, Settings.MAX_HEIGHT)
         self.updateLabel()
-        tkinter.Button(self, text="Download DraftKings Lines", command=dk.get_dataframe).pack(pady=40)
+        tkinter.Button(self, text="Download DraftKings Lines", command=NBAStats.merged_files).pack(pady=40)
         tkinter.Label(self, text=Settings.ABOUT_TEXT).pack(side="bottom")
         self.protocol("WM_DELETE_WINDOW", self.on_close)
 
@@ -47,3 +47,5 @@ class GUI(tkinter.Tk):
                 self.destroy()
         else:   
             self.destroy()
+
+        
