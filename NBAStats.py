@@ -22,7 +22,7 @@ class NBAStatsClass:
             pts = player_list['categories'][1]['totals'][0]        
             rebs = player_list['categories'][0]['totals'][11]
             asts = player_list['categories'][1]['totals'][10]
-            playerInfo = {"Player": playerName, 
+            playerInfo = {"Player": str(playerName), 
                 "MPG": float(mins),
                 "Points": float(pts), 
                 "Rebounds": float(rebs), 
@@ -39,8 +39,16 @@ class NBAStatsClass:
             value_name="Stat")
         
         nbaStats['AvgPerMin'] = round((nbaStats['Stat'] / nbaStats['MPG']), 2)
-        nbaStats[['Mins', 'EstimatedLine']] = ""
+        nbaStats['EstimatedLine'] = ""
 
         mergedFrame = nbaStats.merge(self.DKClass.get_dataframe(), on=['Player', 'Prop Name'])
-        mergedFrame = mergedFrame[['Player', 'MPG','Prop Name', 'Stat', 'AvgPerMin', 'Mins', 'EstimatedLine','Under', 'Line', 'Over']]
-        mergedFrame.to_csv('FinalDataframe.csv', index=False)
+        minsFrame = pd.read_csv('Mins.csv')
+        minsFrame['Player'] = minsFrame['Player'].apply(lambda x: " ".join(x.split()[:2]))
+        finalFrame = mergedFrame.merge(minsFrame, on=['Player'])
+        finalFrame = finalFrame[['Player', 'MPG','Prop Name', 'Stat', 'AvgPerMin', 'Mins', 'EstimatedLine','Under', 'Line', 'Over']]
+        finalFrame['EstimatedLine'] = round(finalFrame['Mins'] * finalFrame['AvgPerMin'], 2)
+        finalFrame['Diff'] = round(finalFrame['EstimatedLine'] - finalFrame['Line'], 2)
+        finalFrame.to_csv('FinalDataframe.csv', index=False)
+
+lol = NBAStatsClass()
+lol.merged_files()
