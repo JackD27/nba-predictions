@@ -45,7 +45,7 @@ class NBAStatsClass:
         minsFrame = pd.read_csv('Mins.csv')
         minsFrame['Player'] = minsFrame['Player'].apply(lambda x: " ".join(x.split()[:2]))
         finalFrame = mergedFrame.merge(minsFrame, on=['Player'])
-        finalFrame = finalFrame[['Player', 'MPG','Prop Name', 'Stat', 'AvgPerMin', 'Mins', 'EstimatedLine','Under', 'Line', 'Over']]
+        finalFrame = finalFrame[['Player', 'Team','MPG','Prop Name', 'Stat', 'AvgPerMin', 'Mins', 'EstimatedLine','Under', 'Line', 'Over']]
         finalFrame['EstimatedLine'] = round(finalFrame['Mins'] * finalFrame['AvgPerMin'], 2)
         finalFrame['Diff'] = round(finalFrame['EstimatedLine'] - finalFrame['Line'], 2)
         finalFrame.to_csv('FinalDataframe.csv', index=False)
